@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovida Gopu | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-color: #e0e0e0;
+            --primary-color: #bb86fc; /* Purple */
+            --secondary-color: #3700b3; /* Darker Purple */
+            --accent-color: #03dac6; /* Teal */
+            --dark-bg: #121212;
+            --dark-card-bg: rgba(30, 30, 30, 0.5);
+            --nav-bg: #28065A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            
+            background: linear-gradient(135deg, #1a013a 0%, #0d011f 50%, #05000f 100%);
+            animation: backgroundShift 20s infinite alternate;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 20%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 20%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><circle cx="5" cy="5" r="1" fill="%23bb86fc" opacity="0.1"/></svg>') 0 0 / 50px 50px repeat;
+            animation: starField 60s linear infinite, glowPulse 4s infinite alternate;
+            opacity: 0.8;
+            backdrop-filter: blur(0.5px);
+        }
+
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        @keyframes starField {
+            from { background-position: 0 0; }
+            to { background-position: 100vw 100vh; }
+        }
+
+        @keyframes glowPulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            position: relative;
+            background: rgba(0,0,0,0.4);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: white;
+            text-shadow: 0 0 15px var(--primary-color), 0 0 30px rgba(187, 134, 252, 0.5);
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-color);
+            text-shadow: 0 0 8px var(--accent-color), 0 0 15px rgba(3, 218, 198, 0.3);
+            animation: slideIn 2s ease-in-out 0.5s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--nav-bg);
+            padding: 1.2rem 0;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+            border-bottom: 1px solid rgba(187, 134, 252, 0.3);
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            margin: 0 1.8rem;
+            transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Sections */
+        .container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            text-shadow: 0 0 10px rgba(187, 134, 252, 0.7);
+        }
+
+        h2::after {
+            content: '';
+            width: 100px;
+            height: 5px;
+            background: var(--accent-color);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .grid {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        /* Frosted Glass Cards */
+        .card {
+            background-color: var(--dark-card-bg);
+            backdrop-filter: blur(8px);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(255,255,255,0.05);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255,255,255,0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(187, 134, 252, 0.2) 0%, transparent 70%);
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            text-shadow: 0 0 5px rgba(187, 134, 252, 0.5);
+        }
+
+        .card h3 a {
+            color: inherit;
+            text-decoration: none;
+            cursor: default;
+        }
+
+        .card h3 a:hover {
+            color: inherit;
+            text-shadow: none;
+        }
+
+        .card p, .card li {
+            font-size: 1.05rem;
+            color: var(--text-color);
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+            margin-top: 0.8rem;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* About Section Specific Styling */
+        .about-content {
+            display: flex;
+            flex-direction: column; /* Stack image and text vertically on small screens */
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .about-image-container {
+            width: 200px; /* Fixed width for the image container */
+            height: 200px; /* Fixed height for the image container */
+            border-radius: 50%; /* Make it round */
+            overflow: hidden; /* Hide parts of the image outside the circle */
+            border: 4px solid var(--accent-color); /* Teal border */
+            box-shadow: 0 0 20px var(--accent-color); /* Glowing effect */
+            flex-shrink: 0; /* Prevent image from shrinking */
+            position: relative;
+        }
+
+        .about-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Crop image to fit without distortion */
+            display: block;
+        }
+
+        .about-text {
+            max-width: 800px; /* Limit width of text for readability */
+            text-align: center; /* Center text */
+        }
+        
+        /* Adjust for larger screens */
+        @media (min-width: 768px) {
+            .about-content {
+                flex-direction: row; /* Image and text side-by-side on larger screens */
+                text-align: left;
+                justify-content: center;
+            }
+            .about-image-container {
+                margin-right: 2rem; /* Space between image and text */
+            }
+            .about-text {
+                text-align: left; /* Align text to left */
+            }
+        }
+
+
+        /* Skills */
+        .skills-category {
+            margin-bottom: 2.5rem;
+        }
+        
+        .skills-category h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(3, 218, 198, 0.4);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .skill-item {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: background-color 0.3s ease-in-out, transform 0.2s, box-shadow 0.3s;
+            cursor: default;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .skill-item:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(3, 218, 198, 0.5);
+        }
+
+        /* Contact */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: white;
+            background-color: var(--primary-color);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(187, 134, 252, 0.4);
+            border: 1px solid var(--primary-color);
+        }
+
+        .contact-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(3, 218, 198, 0.6);
+            border-color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            color: rgba(224, 224, 224, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            margin-top: 5rem;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1 st>Kovida Gopu</h1>
+        <p>Aspiring Software Developer|Web Developer & AI Enthusiast</p>
+    </div>
+    
+    <nav>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="card about-content"> <div class="about-image-container">
+                    <img src="kovida2.jpg" alt="Kovida Gopu Profile Picture">
+                </div>
+                <div class="about-text">
+                    <p>Hello! I'm Kovida Gopu, a passionate and driven B.Tech student specializing in Computer Science and Engineering. I'm fascinated by the intersection of creativity and technology, with a particular focus on web development and artificial intelligence. My journey is fueled by a desire to build innovative solutions and bring new ideas to life.</p>
+                    <p>Through my internships and projects, I've gained hands-on experience in a variety of programming languages and frameworks. I am a lifelong learner, always eager to explore new technologies and take on new challenges.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>B.Tech, Computer Science & Engineering</h3>
+                    <p>PSCMRCET | Pursuing</p>
+                    <p>CPI: 7.91</p>
+                </div>
+                <div class="card">
+                    <h3>Intermediate (MPC)</h3>
+                    <p>Narayana College | 2022</p>
+                    <p>CPI: 8.99</p>
+                </div>
+                <div class="card">
+                    <h3>SSC</h3>
+                    <p>Sri Vijnana Vihara E.M. School | 2020</p>
+                    <p>CPI: 7.3</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Internship Experience</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>AI Intern | AIMERS</h3>
+                    <p>May - Jul 2024</p>
+                    <ul>
+                        <li>Completed a 120-hour, 8-week internship focused on Artificial Intelligence.</li>
+                        <li>Gained hands-on experience in AI concepts, applications, and problem-solving.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Web Development Intern | OCTANET</h3>
+                    <p>June - July 2024</p>
+                    <ul>
+                        <li>Gained hands-on experience in web development, applications, and tools like VS Code.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Harmful Website Detection</h3>
+                    <p><strong>Hackathon Participation - PSCMR College</strong></p>
+                    <p>September 2024</p>
+                    <ul>
+                        <li>Participated in a 24-hour hackathon to detect harmful websites using machine learning.</li>
+                        <li>Gained hands-on experience in teamwork, rapid prototyping, and applying machine learning techniques.</li>
+                                            </ul>
+                </div>
+                <div class="card">
+                    <h3>Automatic Window Blinds</h3>
+                    <p><strong>Arduino Uno Project</strong></p>
+                    <p>July - August 2024</p>
+                    <ul>
+                        <li>Designed and developed automatic window blinds using an Arduino Uno, sensors, and motors.</li>
+                        <li>Integrated light and temperature sensors to adjust blinds based on environmental conditions.</li>
+                                                                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-category">
+                <h4>Programming Languages</h4>
+                <div class="skills-list">
+                    <span class="skill-item">Python</span>
+                    <span class="skill-item">C</span>
+                    <span class="skill-item">C++</span>
+                    <span class="skill-item">Java</span>
+                    <span class="skill-item">SQL</span>
+                    <span class="skill-item">JavaScript</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h4>Web Technologies</h4>
+                <div class="skills-list">
+                    <span class="skill-item">HTML</span>
+                    <span class="skill-item">CSS</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h4>Tools & Platforms</h4>
+                <div class="skills-list">
+                    <span class="skill-item">Jupiter Notebook</span>
+                    <span class="skill-item">VS Code</span>
+                    <span class="skill-item">GitHub</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Cloud Computing [NPTEL]</h3>
+                    <p>Aug - Nov 2024</p>
+                    <p>Gained comprehensive knowledge of cloud services, virtualization, and deployment models.</p>
+                                    </div>
+                <div class="card">
+                    <h3>Career Edge - Young Professional [TCS iON]</h3>
+                    <p>July 2024</p>
+                    <p>Developed professional skills in communication, soft skills, and business etiquette.</p>
+                                   </div>
+                <div class="card">
+                    <h3>Freedom Fest 2024 [Swecha AP]</h3>
+                    <p>March 2024</p>
+                    <p>Gained hands-on experience in visual programming, prototyping with Penpot, and 3D animation using Blender.</p>
+                                    </div>
+                <div class="card">
+                    <h3>SPARDHA 2K24 [VVIT]</h3>
+                    <p>August 2024</p>
+                    <p>Participated in the 'Game of Codes' event at VVIT ACM's National Level Tech Fest.</p>
+                                    </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-links">
+                <a href="mailto:kovidagopu1625@gmail.com">Email</a>
+                <a href="https://linkedin.com/in/kovida-gopu" target="_blank">LinkedIn</a>
+                <a href="https://github.com/kovida1604" target="_blank">GitHub</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Kovida Gopu. Built with passion.</p>
+    </footer>
+
+</body>
+</html>
